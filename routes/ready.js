@@ -3,6 +3,7 @@ const router = express.Router();
 const { Client, GatewayIntentBits, ChannelType, PermissionsBitField } = require('discord.js');
 
 // Handle POST request to /ready endpoint
+console.log("Enter");
 router.post('/', async (req, res) => {
     try {
         const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
@@ -22,16 +23,16 @@ router.post('/', async (req, res) => {
         const channel = await guild.channels.create({
             name: channelName,
             type: ChannelType.GuildText,
-            permissionOverwrites: [
-                {
-                    id: guild.roles.everyone,
-                    deny: [PermissionsBitField.Flags.ViewChannel],
-                },
-                {
-                    id: role.id,
-                    allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.ManageChannels],
-                },
-            ],
+//            permissionOverwrites: [
+//                {
+//                    id: guild.roles.everyone,
+//                    deny: [PermissionsBitField.Flags.ViewChannel],
+//                },
+//                {
+//                    id: role.id,
+//                    allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.ManageChannels],
+//                },
+//            ],
         });
 
         res.status(200).json({ channelId: channel.id, roleId: role.id });
